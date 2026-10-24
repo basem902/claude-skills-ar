@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل مهارات Claude</title>
+<meta name="description" content="دليل عربي مستقل لمهارات Claude (Agent Skills): ما هي، وكيف تثبّتها خطوة بخطوة، وأي المهارات تستحق التثبيت حسب مجالك، وكيف تكتب مهارتك الأولى.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F3F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121517" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F0B429'/%3E%3Cpath d='M9 8h10l4 4v12H9z' fill='none' stroke='%231A1E21' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M13 16h6M13 20h4' stroke='%231A1E21' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add("js");
+    try {
+      var saved = window.localStorage.getItem("csg-theme");
+      if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+    } catch (e) {}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Noto+Kufi+Arabic:wght@600;800&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Noto+Kufi+Arabic:wght@600;800&amp;display=swap"></noscript>
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="wordmark" href="#top" aria-label="دليل مهارات Claude، العودة إلى البداية">
+      <svg class="wordmark-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="6" class="mark-bg"/><path d="M9 8h10l4 4v12H9z" class="mark-line"/><path d="M13 16h6M13 20h4" class="mark-line"/></svg>
+      <span>دليل مهارات <span class="latin">Claude</span></span>
+    </a>
+    <nav class="site-nav" aria-label="أقسام الدليل">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span>الأقسام</span>
+      </button>
+      <ul id="nav-list" class="nav-list">
+        <li><a href="#primer">ما المهارة</a></li>
+        <li><a href="#install">التثبيت</a></li>
+        <li><a href="#explorer">المستكشف</a></li>
+        <li><a href="#stacks">الحزم</a></li>
+        <li><a href="#build">اصنع مهارتك</a></li>
+        <li><a href="#safety">الأمان</a></li>
+        <li><a href="#sources">المصادر</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" id="theme-toggle" aria-label="التبديل إلى الوضع الداكن">
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- 1. البداية -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1 id="hero-title">مهارات <span class="latin">Claude</span> التي تستحق التثبيت، وطريقة تثبيتها</h1>
+        <p class="lede">دليل عربي مستقل. نشرح ما المهارة وكيف تعمل، ونراجع كل مهارة من مستودعها الأصلي، وننقل أوامر التثبيت كما وردت في توثيقها، ثم نساعدك على كتابة مهارتك الأولى.</p>
+        <p class="tally" id="tally">
+          راجعنا <span class="num" data-count="skills">0</span> <span data-noun="skills">مهارة</span>
+          في <span class="num" data-count="fields">0</span> <span data-noun="fields">مجالات</span>.
+          <span class="num" data-count="s-tier">0</span> منها نعدّها أساسية لأي مشروع،
+          وجمعنا بعضها في <span class="num" data-count="stacks">0</span> <span data-noun="stacks">حزم</span> جاهزة.
+        </p>
+        <p class="stamp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="1.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>آخر تحديث: <time id="last-updated" datetime="">…</time></span></p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#explorer">افتح المستكشف</a>
+          <a class="btn" href="#install">ثبّت أول مهارة</a>
+        </div>
+      </div>
+      <nav class="route" aria-labelledby="route-title">
+        <h2 id="route-title" class="route-title">مسار الدليل</h2>
+        <ol>
+          <li><a href="#primer"><strong>افهم</strong><span>ما المهارة، ولماذا لا تُثقل السياق</span></a></li>
+          <li><a href="#install"><strong>ثبّت</strong><span>أربع طرق، بأوامر جاهزة للنسخ</span></a></li>
+          <li><a href="#explorer"><strong>اختر</strong><span>بحث وفلاتر حسب مجالك ودرجة المهارة</span></a></li>
+          <li><a href="#stacks"><strong>اجمع</strong><span>حزم جاهزة حسب نوع عملك</span></a></li>
+          <li><a href="#build"><strong>اصنع</strong><span>مولّد SKILL.md تفاعلي</span></a></li>
+          <li><a href="#safety"><strong>افحص</strong><span>الأمان وقائمة تحقق قبل التثبيت</span></a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 2. ما هي المهارة؟ -->
+  <section class="section" id="primer" aria-labelledby="primer-title">
+    <div class="wrap">
+      <h2 id="primer-title" class="section-title">ما هي المهارة؟</h2>
+      <div class="primer-grid">
+        <div class="primer-text">
+          <p>المهارة (<span class="latin">skill</span>) مجلد صغير يعلّم <span class="latin">Claude</span> طريقة محددة لإنجاز نوع من المهام. قلبه ملف <code dir="ltr">SKILL.md</code>: ترويسة قصيرة (<span class="latin">frontmatter</span>) فيها الاسم والوصف، ثم تعليمات مكتوبة بصيغة <span class="latin">Markdown</span>. ويمكن أن يضم المجلد سكربتات ومراجع لا يقرؤها <span class="latin">Claude</span> إلا عند الحاجة.</p>
+          <p>الفرق بينها وبين الـ <span class="latin">prompt</span> (التعليمات التي تكتبها في المحادثة): تكتب المهارة مرة واحدة، ويستدعيها <span class="latin">Claude</span> وحده كلما طابق طلبُك وصفَها.</p>
+
+          <figure class="anatomy">
+            <figcaption class="anatomy-caption">بنية مجلد مهارة</figcaption>
+            <ul class="anatomy-list">
+              <li><code dir="ltr">review-flutter-code/</code><span>اسم المجلد يطابق الحقل <code dir="ltr">name</code></span></li>
+              <li><code dir="ltr">├── SKILL.md</code><span>الملف الوحيد الإلزامي: الوصف والتعليمات</span></li>
+              <li><code dir="ltr">├── references/</code><span>اختياري: مراجع طويلة تُقرأ عند الحاجة</span></li>
+              <li><code dir="ltr">│   └── layers.md</code><span></span></li>
+              <li><code dir="ltr">└── scripts/</code><span>اختياري: سكربتات يشغّلها <span class="latin">Claude</span>، فيصله ناتجها لا كودها</span></li>
+              <li><code dir="ltr">    └── check_imports.py</code><span></span></li>
+            </ul>
+          </figure>
+        </div>
+
+        <figure class="levels" id="levels" aria-labelledby="levels-title">
+          <figcaption>
+            <h3 id="levels-title">ثلاثة مستويات تحميل</h3>
+            <p>لا يدخل نافذة السياق إلا ما تحتاجه المهمة. لذلك يمكنك تثبيت مهارات كثيرة دون أن تُثقل كل محادثة. نقيس الحجم بالـ <span class="latin">token</span>، وهي الوحدة التي يقيس بها النموذج طول النص.</p>
+          </figcaption>
+          <ol class="level-list">
+            <li class="level" style="--i:0">
+              <div class="level-head"><span class="level-n" aria-hidden="true">1</span><h4>البيانات الوصفية</h4></div>
+              <p class="level-when">تُحمَّل دائمًا، عند بدء الجلسة</p>
+              <p class="level-what">الاسم والوصف من الترويسة فقط</p>
+              <div class="bar" aria-hidden="true"><span style="--w:0.05"></span></div>
+              <p class="level-cost">نحو 100 <span class="latin">token</span> لكل مهارة</p>
+            </li>
+            <li class="level" style="--i:1">
+              <div class="level-head"><span class="level-n" aria-hidden="true">2</span><h4>متن <code dir="ltr">SKILL.md</code></h4></div>
+              <p class="level-when">يُحمَّل حين يطابق طلبُك وصف المهارة</p>
+              <p class="level-what">التعليمات وسير العمل كاملًا</p>
+              <div class="bar" aria-hidden="true"><span style="--w:1"></span></div>
+              <p class="level-cost">أقل من 5000 <span class="latin">token</span></p>
+            </li>
+            <li class="level level-on-demand" style="--i:2">
+              <div class="level-head"><span class="level-n" aria-hidden="true">3</span><h4>الموارد والسكربتات</h4></div>
+              <p class="level-when">عند الحاجة فقط، إن أشارت إليها التعليمات</p>
+              <p class="level-what">المراجع تُقرأ، والسكربتات تُشغَّل فيصل ناتجها وحده</p>
+              <div class="bar bar-empty" aria-hidden="true"><span style="--w:0"></span></div>
+              <p class="level-cost">لا شيء حتى تُستدعى</p>
+            </li>
+          </ol>
+          <div class="levels-foot">
+            <p class="source-note">الأرقام تقريبية، من <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" rel="noopener">توثيق <span class="latin">Agent Skills</span> الرسمي</a>. عرض الأشرطة توضيحي.</p>
+            <button type="button" class="btn btn-quiet btn-small" id="levels-replay">أعد عرض التسلسل</button>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. خطوات التثبيت -->
+  <section class="section section-alt" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="install-title" class="section-title">خطوات التثبيت</h2>
+        <p>اختر الطريقة التي تناسب أداتك. كل أمر هنا منقول من التوثيق الرسمي أو من README المستودع، وبجانبه زر نسخ. الأوامر التي تبدأ بشرطة مائلة <code dir="ltr">/</code> تُكتب داخل جلسة <span class="latin">Claude Code</span>، والباقي في الطرفية.</p>
+      </div>
+
+      <div class="tabs" id="install-tabs">
+        <div class="tablist" role="tablist" aria-label="طرق التثبيت">
+          <button type="button" role="tab" id="tab-plugin" aria-controls="panel-plugin" aria-selected="true">سوق الإضافات</button>
+          <button type="button" role="tab" id="tab-cli" aria-controls="panel-cli" aria-selected="false" tabindex="-1">أداة <span class="latin">skills</span></button>
+          <button type="button" role="tab" id="tab-manual" aria-controls="panel-manual" aria-selected="false" tabindex="-1">نسخ يدوي</button>
+          <button type="button" role="tab" id="tab-web" aria-controls="panel-web" aria-selected="false" tabindex="-1"><span class="latin">claude.ai</span></button>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-plugin" aria-labelledby="tab-plugin" tabindex="0">
+          <p class="panel-intro">الطريقة الأصلية في <span class="latin">Claude Code</span>. الإضافة (<span class="latin">plugin</span>) حزمة قد تضم مهارات وأوامر و<span class="latin">hooks</span>، والسوق (<span class="latin">marketplace</span>) مستودع يفهرس الإضافات. نستخدم هنا مستودع <span class="latin">Anthropic</span> الرسمي مثالًا.</p>
+          <ol class="steps">
+            <li class="step">
+              <h3>شغّل <span class="latin">Claude Code</span> في مجلد مشروعك</h3>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">claude</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> تبدأ جلسة تفاعلية في الطرفية، وفيها تكتب الأوامر التي تبدأ بشرطة مائلة.</p>
+            </li>
+            <li class="step">
+              <h3>أضف السوق</h3>
+              <div class="cmd"><span class="cmd-where">داخل Claude Code</span><code dir="ltr">/plugin marketplace add anthropics/skills</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> يُسجَّل سوق باسم <code dir="ltr">anthropic-agent-skills</code>. للتأكد اكتب <code dir="ltr">/plugin</code> واختر <span class="latin">Browse and install plugins</span>، فتجده في القائمة.</p>
+            </li>
+            <li class="step">
+              <h3>ثبّت إضافة من السوق</h3>
+              <div class="cmd"><span class="cmd-where">داخل Claude Code</span><code dir="ltr">/plugin install document-skills@anthropic-agent-skills</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> تُثبَّت مهارات <span class="latin">docx</span> و<span class="latin">pdf</span> و<span class="latin">pptx</span> و<span class="latin">xlsx</span> معًا. صيغة الأمر ثابتة: اسم الإضافة، ثم <code dir="ltr">@</code>، ثم اسم السوق.</p>
+            </li>
+            <li class="step">
+              <h3>حمّل الإضافات الجديدة</h3>
+              <div class="cmd"><span class="cmd-where">داخل Claude Code</span><code dir="ltr">/reload-plugins</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> تصبح المهارات متاحة في الجلسة الحالية. يستدعيها <span class="latin">Claude</span> حين يطابق طلبك وصفها، أو تستدعيها بنفسك بصيغة <code dir="ltr">/plugin-name:skill-name</code>.</p>
+            </li>
+          </ol>
+          <aside class="note">
+            <p>بعض الإضافات موجودة في السوق الرسمي <code dir="ltr">claude-plugins-official</code> فلا تحتاج الخطوة الثانية، مثل:</p>
+            <div class="cmd"><span class="cmd-where">داخل Claude Code</span><code dir="ltr">/plugin install skill-creator@claude-plugins-official</code><button type="button" class="copy">نسخ</button></div>
+            <p>وإن كنت خارج الجلسة فالأمر نفسه متاح من الطرفية بصيغة <code dir="ltr">claude plugin install &lt;plugin&gt;@&lt;marketplace&gt;</code>.</p>
+          </aside>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-cli" aria-labelledby="tab-cli" tabindex="0" hidden>
+          <p class="panel-intro">أداة سطر أوامر مفتوحة المصدر من <span class="latin">Vercel</span>، تثبّت المهارات من أي مستودع <span class="latin">GitHub</span> لـ <span class="latin">Claude Code</span> ولوكلاء برمجة آخرين. تتطلب <span class="latin">Node.js</span> بإصدار 22.20 أو أحدث.</p>
+          <ol class="steps">
+            <li class="step">
+              <h3>استعرض مهارات المستودع دون تثبيت</h3>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">npx skills add vercel-labs/agent-skills --list</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> قائمة بأسماء المهارات في المستودع. لا يُثبَّت شيء بعد.</p>
+            </li>
+            <li class="step">
+              <h3>ثبّت مهارة واحدة لـ <span class="latin">Claude Code</span></h3>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">npx skills add vercel-labs/agent-skills --skill web-design-guidelines -a claude-code</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> تُثبَّت المهارة داخل المشروع الحالي افتراضيًا، فتصبح جزءًا منه ويمكن مشاركتها مع فريقك عبر <span class="latin">git</span>.</p>
+            </li>
+            <li class="step">
+              <h3>أو ثبّتها لكل مشاريعك</h3>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">npx skills add vercel-labs/agent-skills --skill web-design-guidelines -a claude-code -g</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> الخيار <code dir="ltr">-g</code> يثبّتها في مجلد المستخدم بدل المشروع، فتتاح في كل مشاريعك.</p>
+            </li>
+            <li class="step">
+              <h3>تحقّق ثم حدّث لاحقًا</h3>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">npx skills list</code><button type="button" class="copy">نسخ</button></div>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">npx skills update</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> الأول يعرض المهارات المثبّتة، والثاني يحدّثها إلى آخر إصدار.</p>
+            </li>
+          </ol>
+          <aside class="note">
+            <p>تجمع الأداة بيانات استخدام مجهولة الهوية. لتعطيلها اضبط المتغير <code dir="ltr">DISABLE_TELEMETRY=1</code> قبل تشغيلها.</p>
+          </aside>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-manual" aria-labelledby="tab-manual" tabindex="0" hidden>
+          <p class="panel-intro">المهارة مجرد مجلد، فيكفي نسخه إلى المكان الصحيح. لا يحدّث هذا الأسلوب شيئًا تلقائيًا، وقد يكون ذلك ميزة: تعرف بالضبط ما الذي ثبّتّه.</p>
+          <ol class="steps">
+            <li class="step">
+              <h3>اختر النطاق</h3>
+              <dl class="scope">
+                <div><dt>شخصي</dt><dd><code dir="ltr">~/.claude/skills/&lt;name&gt;/</code> متاح في كل مشاريعك على هذا الجهاز.</dd></div>
+                <div><dt>للمشروع</dt><dd><code dir="ltr">.claude/skills/&lt;name&gt;/</code> متاح في هذا المستودع فقط، ويصل إلى فريقك عبر <span class="latin">git</span>.</dd></div>
+              </dl>
+              <p class="expect"><strong>تذكّر:</strong> اجعل اسم المجلد مطابقًا للحقل <code dir="ltr">name</code> في ترويسة <code dir="ltr">SKILL.md</code>.</p>
+            </li>
+            <li class="step">
+              <h3>انسخ المجلد كمهارة شخصية</h3>
+              <p class="cmd-label">في <span class="latin">macOS</span> و<span class="latin">Linux</span> و<span class="latin">Git Bash</span>:</p>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">mkdir -p ~/.claude/skills &amp;&amp; cp -r ./my-skill ~/.claude/skills/my-skill</code><button type="button" class="copy">نسخ</button></div>
+              <p class="cmd-label">في <span class="latin">PowerShell</span>:</p>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">New-Item -ItemType Directory -Force "$HOME\.claude\skills"; Copy-Item -Recurse .\my-skill "$HOME\.claude\skills\my-skill"</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> ملف <code dir="ltr">SKILL.md</code> في جذر المجلد الجديد مباشرة، وترويسته تبدأ من السطر الأول.</p>
+            </li>
+            <li class="step">
+              <h3>أو انسخه إلى المشروع وشاركه</h3>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">mkdir -p .claude/skills &amp;&amp; cp -r ./my-skill .claude/skills/my-skill</code><button type="button" class="copy">نسخ</button></div>
+              <div class="cmd"><span class="cmd-where">في الطرفية</span><code dir="ltr">git add .claude/skills/my-skill &amp;&amp; git commit -m "Add my-skill skill"</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> كل من يستنسخ المستودع يحصل على المهارة نفسها، وأي تعديل عليها يظهر في مراجعة الكود.</p>
+            </li>
+            <li class="step">
+              <h3>تأكد أن <span class="latin">Claude</span> يراها</h3>
+              <div class="cmd"><span class="cmd-where">داخل Claude Code</span><code dir="ltr">/my-skill</code><button type="button" class="copy">نسخ</button></div>
+              <p class="expect"><strong>ما الذي يجب أن تراه:</strong> افتح جلسة جديدة واكتب <code dir="ltr">/</code>، فيظهر اسم المهارة في القائمة. كتابة اسمها بعد الشرطة تستدعيها مباشرة.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-web" aria-labelledby="tab-web" tabindex="0" hidden>
+          <p class="panel-intro">في <span class="latin">claude.ai</span> لا تُثبَّت المهارات بأوامر. ترفع مهارتك المخصّصة ملفًا مضغوطًا (<span class="latin">ZIP</span>) من الإعدادات، ويلزم أن يكون تنفيذ الكود (<span class="latin">code execution</span>) مفعّلًا.</p>
+          <ul class="facts">
+            <li>المهارة المرفوعة تخصك وحدك، ولا تنتقل تلقائيًا إلى <span class="latin">Claude Code</span> أو إلى الـ <span class="latin">API</span>.</li>
+            <li>مهارات المستندات الجاهزة (<span class="latin">Word</span> و<span class="latin">Excel</span> و<span class="latin">PowerPoint</span> و<span class="latin">PDF</span>) تعمل تلقائيًا دون أي إعداد.</li>
+            <li>واجهة الإعدادات تتغير من حين لآخر، لذلك لا ننسخ خطواتها هنا. اتبع مقال مركز المساعدة الرسمي (بالإنجليزية):</li>
+          </ul>
+          <p class="link-row">
+            <a class="btn btn-primary" href="https://support.claude.com/en/articles/12512180-using-skills-in-claude" rel="noopener"><span class="latin">Use skills in Claude</span></a>
+            <a class="btn" href="https://support.claude.com/en/articles/12512198-creating-custom-skills" rel="noopener"><span class="latin">How to create custom skills</span></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. المستكشف -->
+  <section class="section" id="explorer" aria-labelledby="explorer-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="explorer-title" class="section-title">المستكشف</h2>
+        <p>تحققنا من كل مهارة هنا في مستودعها. افتح أي بطاقة لترى سبب اختيارها، ومثالًا عمليًا، وأوامر تثبيتها، ورخصتها.</p>
+      </div>
+
+      <div class="explorer">
+        <div class="filters" role="search" aria-label="بحث المهارات وفلترتها">
+          <div class="field search-field">
+            <label for="search">ابحث في المهارات</label>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+              <input id="search" type="search" autocomplete="off" spellcheck="false" placeholder="اسم أو وصف، بالعربية أو الإنجليزية" aria-describedby="search-hint">
+              <kbd aria-hidden="true">/</kbd>
+            </div>
+            <p class="hint" id="search-hint">اضغط <kbd>/</kbd> من أي مكان للانتقال إلى البحث.</p>
+          </div>
+          <fieldset class="chip-group">
+            <legend>المجال</legend>
+            <div class="chips" id="field-chips"></div>
+          </fieldset>
+          <fieldset class="chip-group">
+            <legend>الدرجة</legend>
+            <div class="chips" id="tier-chips"></div>
+          </fieldset>
+          <button type="button" class="btn btn-quiet btn-small" id="clear-filters">امسح الفلاتر</button>
+          <dl class="tier-legend" id="tier-legend"></dl>
+        </div>
+
+        <div class="results">
+          <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
+          <ul class="skill-grid" id="skill-grid"></ul>
+          <div class="empty" id="empty-state" hidden>
+            <h3>لا توجد مهارة تطابق هذا البحث</h3>
+            <p>جرّب كلمة أعم أو اسم المهارة بالإنجليزية، أو أزل أحد الفلاتر. البحث يتجاهل التشكيل والفرق بين الهمزات والتاء المربوطة.</p>
+            <button type="button" class="btn" id="empty-clear">امسح الفلاتر واعرض الكل</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. حزم جاهزة -->
+  <section class="section section-alt" id="stacks" aria-labelledby="stacks-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="stacks-title" class="section-title">حزم جاهزة</h2>
+        <p>مجموعات صغيرة مرتبة حسب نوع عملك. ثبّتها بالترتيب، وتوقف عند ما يكفيك. اضغط اسم أي مهارة لتفتح تفاصيلها.</p>
+      </div>
+      <div class="stacks" id="stack-list"></div>
+    </div>
+  </section>
+
+  <!-- 6. اصنع مهارتك -->
+  <section class="section" id="build" aria-labelledby="build-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="build-title" class="section-title">اصنع مهارتك</h2>
+        <p>املأ الحقول وشاهد ملف <code dir="ltr">SKILL.md</code> يتكوّن أمامك، ثم انسخه أو نزّله. يتحقق المولّد من قواعد الاسم والوصف في المواصفة الرسمية.</p>
+      </div>
+
+      <div class="example-row">
+        <span class="example-label" id="example-label">ابدأ من مثال:</span>
+        <button type="button" class="btn btn-small" data-example="flutter" aria-describedby="example-label">مراجعة كود <span class="latin">Flutter</span> وفق <span class="latin">Clean Architecture</span></button>
+        <button type="button" class="btn btn-small" data-example="commits" aria-describedby="example-label">رسائل <span class="latin">commit</span> بصيغة <span class="latin">Conventional Commits</span></button>
+      </div>
+
+      <div class="gen-grid">
+        <form class="gen-form" id="gen-form" novalidate>
+          <div class="field">
+            <label for="g-name">اسم المهارة</label>
+            <input id="g-name" name="name" type="text" dir="ltr" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="review-flutter-code" aria-describedby="g-name-hint g-name-error">
+            <p class="hint" id="g-name-hint">حروف إنجليزية صغيرة وأرقام وشرطات، حتى 64 حرفًا، دون شرطة في البداية أو النهاية. يطابق اسم المجلد.</p>
+            <p class="field-error" id="g-name-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="g-desc">الوصف</label>
+            <textarea id="g-desc" name="description" rows="4" dir="auto" aria-describedby="g-desc-hint g-desc-count g-desc-error"></textarea>
+            <div class="field-meta">
+              <p class="hint" id="g-desc-hint">اكتبه كقاعدة توجيه: ماذا تفعل المهارة، ومتى تُستخدم. <span class="latin">Claude</span> يقرر استدعاء المهارة من هذا الوصف وحده.</p>
+              <span class="counter" id="g-desc-count">0 / 1024</span>
+            </div>
+            <p class="field-error" id="g-desc-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="g-body">التعليمات</label>
+            <textarea id="g-body" name="body" rows="7" dir="auto" aria-describedby="g-body-hint"></textarea>
+            <p class="hint" id="g-body-hint">الخطوات التي يتبعها <span class="latin">Claude</span> حين تُستدعى المهارة. يمكنك استخدام <span class="latin">Markdown</span>.</p>
+          </div>
+          <details class="optional">
+            <summary>أقسام اختيارية: أمثلة وإرشادات</summary>
+            <div class="field">
+              <label for="g-examples">أمثلة</label>
+              <textarea id="g-examples" name="examples" rows="3" dir="auto" aria-describedby="g-examples-hint"></textarea>
+              <p class="hint" id="g-examples-hint">كل سطر يصبح بندًا في قسم <code dir="ltr">## Examples</code>.</p>
+            </div>
+            <div class="field">
+              <label for="g-guidelines">إرشادات</label>
+              <textarea id="g-guidelines" name="guidelines" rows="3" dir="auto" aria-describedby="g-guidelines-hint"></textarea>
+              <p class="hint" id="g-guidelines-hint">كل سطر يصبح بندًا في قسم <code dir="ltr">## Guidelines</code>.</p>
+            </div>
+          </details>
+        </form>
+
+        <div class="gen-preview">
+          <div class="preview-head">
+            <h3 id="preview-title">معاينة <code dir="ltr">SKILL.md</code></h3>
+            <p class="preview-path">احفظه في <code dir="ltr" id="g-path">~/.claude/skills/&lt;name&gt;/SKILL.md</code></p>
+          </div>
+          <pre class="preview" dir="ltr" tabindex="0" aria-labelledby="preview-title"><code id="g-preview"></code></pre>
+          <div class="gen-actions">
+            <button type="button" class="btn btn-primary" id="g-copy">انسخ الملف</button>
+            <button type="button" class="btn" id="g-download">نزّل <span class="latin">SKILL.md</span></button>
+            <button type="button" class="btn btn-quiet" id="g-reset">امسح الحقول</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tips">
+        <h3 class="tips-title">قبل أن تكتب</h3>
+        <ul class="tips-list">
+          <li><h4>مهمة واحدة لكل مهارة</h4><p>مهارة تراجع الكود وتكتب رسائل <span class="latin">commit</span> وتنشر التطبيق لن تُستدعى بدقة. قسّمها؛ فالوصف المركّز أسهل مطابقة.</p></li>
+          <li><h4><code dir="ltr">SKILL.md</code> قصير، والتفاصيل في ملفات مرجعية</h4><p>يوصي التوثيق بإبقائه تحت 500 سطر، ونقل المراجع الطويلة إلى ملفات يقرؤها <span class="latin">Claude</span> عند الحاجة فقط.</p></li>
+          <li><h4>سكربت للعمل الحتمي</h4><p>التحقق من صيغة أو تحويل ملف عمل لا يحتاج اجتهادًا. ضعه في سكربت: يشغّله <span class="latin">Claude</span> ولا يدخل كوده السياق، بل ناتجه فقط.</p></li>
+          <li><h4>الأمثلة أقوى من القواعد</h4><p>مثال واحد لمدخل ومخرج متوقع يوضح ما لا توضحه فقرة كاملة من التعليمات.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. الأمان -->
+  <section class="section band-warn" id="safety" aria-labelledby="safety-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="safety-title" class="section-title">الأمان قبل التثبيت</h2>
+        <p>المهارة تعليمات وكود ينفّذه <span class="latin">Claude</span> بصلاحياتك. توثيق <span class="latin">Anthropic</span> نفسه يوصي باستخدام المهارات من مصادر موثوقة فقط، وبمراجعتها كما تراجع أي برنامج قبل تثبيته.</p>
+      </div>
+      <ul class="rules">
+        <li>
+          <h3>اقرأ قبل أن تثبّت</h3>
+          <p>افتح <code dir="ltr">SKILL.md</code> وكل ملف في <code dir="ltr">scripts/</code>. ابحث عن أوامر لا تناسب غرض المهارة، أو تعليمات تطلب من <span class="latin">Claude</span> جلب نص من رابط خارجي ثم اتباعه.</p>
+        </li>
+        <li>
+          <h3>فضّل المؤلفين المعروفين</h3>
+          <p>فرق المنتجات نفسها وشركات الأمان المعروفة أقل خطرًا من حساب مجهول. وعدد النجوم على <span class="latin">GitHub</span> ليس دليل أمان.</p>
+        </li>
+        <li>
+          <h3>ثبّت نسخة راجعتها</h3>
+          <p>الإضافات تحدّث نفسها، وما راجعته اليوم قد يتغيّر غدًا. في المشاريع الحساسة انسخ المهارة يدويًا من <span class="latin">commit</span> راجعته، واحفظها في <code dir="ltr">.claude/skills/</code> داخل المستودع ليظهر أي تغيير في مراجعة الكود.</p>
+        </li>
+        <li>
+          <h3>احذر الاتصالات غير الموثّقة و<code dir="ltr">curl | bash</code></h3>
+          <p>سكربت يتصل بالشبكة دون أن يذكر ذلك علامة تحذير. والمثبّت الذي يمرّر سكربتًا من الإنترنت مباشرة إلى <span class="latin">bash</span> ينفّذ ما لم تقرأه؛ نزّل السكربت واقرأه أولًا، أو اختر طريقة تثبيت أخرى إن وُجدت.</p>
+        </li>
+        <li>
+          <h3>راجع <span class="latin">hooks</span> وخوادم <span class="latin">MCP</span> في الإضافات</h3>
+          <p>الإضافة قد تضم <span class="latin">hooks</span> تعمل تلقائيًا بعد كل أداة، أو تمنح أدواتها إذنًا دائمًا. هذه الأجزاء تعمل دون أن تسألك، فاقرأها قبل غيرها.</p>
+        </li>
+        <li>
+          <h3>لا تثبّت مهارتين لمهمة واحدة</h3>
+          <p>يختار <span class="latin">Claude</span> المهارة بمطابقة طلبك مع أوصافها، فمهارتان بوصفين متقاربين تتنافسان وتربكان الاستدعاء. مثال من هذا الدليل: مهارة اختبار في <span class="latin">Dart</span> تعتمد <span class="latin">mockito</span>، وإضافة <span class="latin">VGV</span> تفرض <span class="latin">mocktail</span>.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8. قائمة التحقق -->
+  <section class="section" id="checklist" aria-labelledby="checklist-title">
+    <div class="wrap narrow">
+      <h2 id="checklist-title" class="section-title">قائمة تحقق قبل التثبيت</h2>
+      <p>مرّ على هذه البنود قبل تثبيت أي مهارة جديدة. يحفظ المتصفح علاماتك على هذا الجهاز إن سمح بالتخزين.</p>
+      <div class="progress">
+        <div class="progress-row">
+          <span id="progress-label">التقدّم</span>
+          <span class="progress-text" id="progress-text">0 من 8</span>
+        </div>
+        <progress id="check-progress" max="8" value="0" aria-labelledby="progress-label"></progress>
+      </div>
+      <ul class="checklist" id="checklist">
+        <li><input type="checkbox" id="chk-read" data-key="read"><label for="chk-read">قرأت <code dir="ltr">SKILL.md</code> كاملًا، وأعرف متى تُستدعى المهارة.</label></li>
+        <li><input type="checkbox" id="chk-scripts" data-key="scripts"><label for="chk-scripts">راجعت كل ملف في <code dir="ltr">scripts/</code>، ولا أوامر شبكة غير موثّقة فيه.</label></li>
+        <li><input type="checkbox" id="chk-author" data-key="author"><label for="chk-author">المؤلف معروف، والمستودع نشط ويجيب عن المشكلات.</label></li>
+        <li><input type="checkbox" id="chk-license" data-key="license"><label for="chk-license">الرخصة تسمح بالاستخدام الذي أنويه.</label></li>
+        <li><input type="checkbox" id="chk-overlap" data-key="overlap"><label for="chk-overlap">لا توجد مهارة مثبّتة عندي بوصف قريب من وصفها.</label></li>
+        <li><input type="checkbox" id="chk-installer" data-key="installer"><label for="chk-installer">التثبيت لا يمرّر سكربتًا إلى <code dir="ltr">bash</code> مباشرة، أو قرأت السكربت قبل تشغيله.</label></li>
+        <li><input type="checkbox" id="chk-hooks" data-key="hooks"><label for="chk-hooks">إن كانت إضافة: راجعت ما فيها من <span class="latin">hooks</span> وخوادم <span class="latin">MCP</span>.</label></li>
+        <li><input type="checkbox" id="chk-remove" data-key="remove"><label for="chk-remove">أعرف كيف أحدّثها وكيف أزيلها.</label></li>
+      </ul>
+      <div class="checklist-foot">
+        <button type="button" class="btn btn-quiet btn-small" id="checklist-reset">ابدأ القائمة من جديد</button>
+        <p class="hint" id="storage-note" hidden>التخزين المحلي غير متاح في هذا المتصفح. القائمة تعمل، لكنها لن تُحفظ بعد إغلاق الصفحة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. المصادر -->
+  <section class="section section-alt" id="sources" aria-labelledby="sources-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="sources-title" class="section-title">المصادر</h2>
+        <p>كل ما اعتمدنا عليه في هذا الدليل. اطّلعنا على المصادر جميعها في التاريخ المذكور بجانب كل منها.</p>
+      </div>
+      <div class="sources-grid">
+        <div>
+          <h3 class="sources-group">التوثيق الرسمي</h3>
+          <ul class="sources" id="sources-official">
+            <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" rel="noopener"><span class="latin">Agent Skills</span> (نظرة عامة)</a><span class="src-meta"><span class="latin">platform.claude.com</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">مستويات التحميل وتكلفتها، وقواعد الاسم والوصف، وإرشادات الأمان.</span></li>
+            <li><a href="https://code.claude.com/docs/en/skills" rel="noopener"><span class="latin">Use Skills in Claude Code</span></a><span class="src-meta"><span class="latin">code.claude.com</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">مسارات المهارات الشخصية ومهارات المشروع، وأوامر الإضافات.</span></li>
+            <li><a href="https://support.claude.com/en/articles/12512180-using-skills-in-claude" rel="noopener"><span class="latin">Use skills in Claude</span></a><span class="src-meta"><span class="latin">support.claude.com</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">رفع المهارات المخصصة في <span class="latin">claude.ai</span>.</span></li>
+            <li><a href="https://agentskills.io/specification" rel="noopener"><span class="latin">Agent Skills Specification</span></a><span class="src-meta"><span class="latin">agentskills.io</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">بنية المجلد وقواعد الحقول التي يتحقق منها المولّد.</span></li>
+            <li><a href="https://github.com/vercel-labs/skills/blob/main/docs/commands.md" rel="noopener"><span class="latin">skills CLI reference</span></a><span class="src-meta"><span class="latin">github.com/vercel-labs/skills</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">صيغ المصادر وخيارات <code dir="ltr">--skill</code> و<code dir="ltr">-a</code> و<code dir="ltr">-g</code>.</span></li>
+            <li><a href="https://docs.flutter.dev/ai/get-started" rel="noopener"><span class="latin">Get started developing with AI</span></a><span class="src-meta"><span class="latin">docs.flutter.dev</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">أوامر تثبيت إضافات <span class="latin">Flutter</span> ومهارات <span class="latin">Dart</span>.</span></li>
+            <li><a href="https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md" rel="noopener"><span class="latin">frontend-design</span> (نص المهارة)</a><span class="src-meta"><span class="latin">github.com/anthropics/skills</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">استرشدنا به في تصميم هذا الدليل.</span></li>
+            <li><a href="https://github.com/funboy322/avoid-ai-design/blob/main/references/ai-tells-catalog.md" rel="noopener"><span class="latin">AI tells catalog</span></a><span class="src-meta"><span class="latin">github.com/funboy322</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">بسببه غيّرنا لوحة الألوان قبل البناء.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="sources-group">مستودعات المهارات وملفاتها</h3>
+          <ul class="sources" id="sources-repos"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p><strong>دليل مهارات <span class="latin">Claude</span></strong> دليل مستقل، لا يتبع <span class="latin">Anthropic</span> ولا أيًا من مؤلفي المهارات المذكورة. كل مهارة ملك لمؤلفها وتخضع لرخصتها، و<span class="latin">Claude</span> علامة تجارية لشركة <span class="latin">Anthropic</span>.</p>
+    <p>استلهمنا تقسيم الأقسام من <a href="https://ahmadmansy.github.io/claude-skills/" rel="noopener">دليل مهارات <span class="latin">Claude</span> لأحمد منسي</a>، أما النصوص والتصميم والمراجعة فمن عملنا. راجع المستودع الأصلي لكل مهارة قبل تثبيتها، فالمهارات تتغير بسرعة.</p>
+    <p><a href="#top">العودة إلى البداية</a></p>
+  </div>
+</footer>
+
+<dialog class="dialog" id="skill-dialog" aria-labelledby="dlg-title">
+  <div class="dlg-head">
+    <div class="dlg-titles">
+      <div class="dlg-badges" id="dlg-badges"></div>
+      <h2 id="dlg-title"></h2>
+      <p class="dlg-sub" id="dlg-sub"></p>
+    </div>
+    <button type="button" class="dlg-close" id="dlg-close" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="dlg-body" id="dlg-body"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<script src="data/skills.js" defer></script>
+<script src="data/stacks.js" defer></script>
+<script src="assets/js/core.js" defer></script>
+<script src="assets/js/explorer.js" defer></script>
+<script src="assets/js/generator.js" defer></script>
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
