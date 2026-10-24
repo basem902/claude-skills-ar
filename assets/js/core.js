@@ -93,8 +93,12 @@
       .replace(/"/g, "&quot;");
   };
   // نصوص البيانات تقبل `كود` بين علامتي backtick؛ يُعرض داخل <code dir="ltr">.
+  // المقاطع القصيرة لا تنكسر في منتصفها (مسافات غير قابلة للكسر)، والطويلة تلتف كالمعتاد.
   CSG.rich = function (text) {
-    return CSG.escape(text).replace(/`([^`]+)`/g, '<code dir="ltr">$1</code>');
+    return CSG.escape(text).replace(/`([^`]+)`/g, function (_, code) {
+      if (code.length <= 32) code = code.replace(/ /g, " ");
+      return '<code dir="ltr">' + code + "</code>";
+    });
   };
   CSG.el = function (tag, attrs, children) {
     var node = document.createElement(tag);
@@ -155,6 +159,40 @@
     return Promise.resolve(done(legacyCopy(text)));
   };
 
+  // يضيف فرص كسر سطر (<wbr>) بعد / و@ حتى يلتف الأمر الطويل عند حدود منطقية لا في وسط كلمة.
+  // <wbr> لا نص فيه، فيبقى textContent والنسخ مطابقين للأمر الأصلي.
+  // الخيارات مثل --skill و-g تبقى كتلة واحدة حتى لا تنكسر بعد الشرطة.
+  CSG.breakable = function (text) {
+    var fragment = document.createDocumentFragment();
+    text.split(/( +)/).forEach(function (token) {
+      if (!token) return;
+      if (token.charAt(0) === "-") {
+        fragment.appendChild(CSG.el("span", { className: "nowrap", text: token }));
+        return;
+      }
+      var buffer = "";
+      for (var i = 0; i < token.length; i++) {
+        var ch = token.charAt(i);
+        buffer += ch;
+        if ((ch === "/" || ch === "@") && token.charAt(i + 1) !== "/" && i < token.length - 1) {
+          fragment.appendChild(document.createTextNode(buffer));
+          fragment.appendChild(document.createElement("wbr"));
+          buffer = "";
+        }
+      }
+      if (buffer) fragment.appendChild(document.createTextNode(buffer));
+    });
+    return fragment;
+  };
+  CSG.makeBreakable = function (scope) {
+    (scope || document).querySelectorAll(".cmd code").forEach(function (code) {
+      if (code.children.length) return;
+      var text = code.textContent;
+      code.textContent = "";
+      code.appendChild(CSG.breakable(text));
+    });
+  };
+
   // زر نسخ داخل .cmd أو .codeblock ينسخ نص عنصر code المجاور.
   CSG.labelCopyButtons = function (scope) {
     (scope || document).querySelectorAll(".cmd .copy, .codeblock .copy").forEach(function (button) {
@@ -164,6 +202,7 @@
   };
   CSG.initCopy = function () {
     CSG.labelCopyButtons(document);
+    CSG.makeBreakable(document);
     document.addEventListener("click", function (event) {
       var button = event.target.closest ? event.target.closest(".copy") : null;
       if (!button) return;

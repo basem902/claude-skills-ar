@@ -147,9 +147,11 @@
   }
 
   function commandRow(cmd) {
+    var code = el("code", { dir: "ltr" });
+    code.appendChild(CSG.breakable(cmd));
     return el("div", { className: "cmd" }, [
       el("span", { className: "cmd-where", text: whereLabel(cmd) }),
-      el("code", { dir: "ltr", text: cmd }),
+      code,
       el("button", { type: "button", className: "copy", "aria-label": "انسخ: " + cmd, text: "نسخ" })
     ]);
   }
@@ -327,7 +329,6 @@
     } else {
       dialog.setAttribute("open", "");
     }
-    document.documentElement.classList.add("dialog-open");
     document.getElementById("dlg-title").focus();
   };
 
@@ -338,7 +339,6 @@
   }
 
   function onClosed() {
-    document.documentElement.classList.remove("dialog-open");
     var target = lastTrigger;
     lastTrigger = null;
     if (target && document.contains(target) && typeof target.focus === "function") target.focus();

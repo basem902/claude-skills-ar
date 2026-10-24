@@ -21,8 +21,8 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Noto+Kufi+Arabic:wght@600;800&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Noto+Kufi+Arabic:wght@600;800&amp;display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&amp;family=IBM+Plex+Sans+Arabic:wght@400;600&amp;family=Noto+Kufi+Arabic:wght@800&amp;display=optional" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&amp;family=IBM+Plex+Sans+Arabic:wght@400;600&amp;family=Noto+Kufi+Arabic:wght@800&amp;display=optional"></noscript>
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
@@ -267,8 +267,8 @@
             <li>واجهة الإعدادات تتغير من حين لآخر، لذلك لا ننسخ خطواتها هنا. اتبع مقال مركز المساعدة الرسمي (بالإنجليزية):</li>
           </ul>
           <p class="link-row">
-            <a class="btn btn-primary" href="https://support.claude.com/en/articles/12512180-using-skills-in-claude" rel="noopener"><span class="latin">Use skills in Claude</span></a>
-            <a class="btn" href="https://support.claude.com/en/articles/12512198-creating-custom-skills" rel="noopener"><span class="latin">How to create custom skills</span></a>
+            <a class="btn btn-primary" href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" rel="noopener"><span class="latin">Use skills in Claude</span></a>
+            <a class="btn" href="https://support.claude.com/en/articles/12512198-how-to-create-custom-skills" rel="noopener"><span class="latin">How to create custom skills</span></a>
           </p>
         </div>
       </div>
@@ -294,20 +294,23 @@
             </div>
             <p class="hint" id="search-hint">اضغط <kbd>/</kbd> من أي مكان للانتقال إلى البحث.</p>
           </div>
-          <fieldset class="chip-group">
-            <legend>المجال</legend>
-            <div class="chips" id="field-chips"></div>
-          </fieldset>
-          <fieldset class="chip-group">
+          <fieldset class="chip-group chip-group-tier">
             <legend>الدرجة</legend>
             <div class="chips" id="tier-chips"></div>
           </fieldset>
-          <button type="button" class="btn btn-quiet btn-small" id="clear-filters">امسح الفلاتر</button>
+          <fieldset class="chip-group chip-group-field">
+            <legend>المجال</legend>
+            <div class="chips" id="field-chips"></div>
+          </fieldset>
           <dl class="tier-legend" id="tier-legend"></dl>
         </div>
 
         <div class="results">
-          <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
+          <div class="results-head">
+            <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
+            <button type="button" class="btn btn-quiet btn-small" id="clear-filters">امسح الفلاتر</button>
+          </div>
+          <noscript><p class="empty">يحتاج المستكشف والحزم ومولّد <code dir="ltr">SKILL.md</code> إلى تفعيل JavaScript. بقية الدليل تعمل دونه.</p></noscript>
           <ul class="skill-grid" id="skill-grid"></ul>
           <div class="empty" id="empty-state" hidden>
             <h3>لا توجد مهارة تطابق هذا البحث</h3>
@@ -485,7 +488,7 @@
           <ul class="sources" id="sources-official">
             <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" rel="noopener"><span class="latin">Agent Skills</span> (نظرة عامة)</a><span class="src-meta"><span class="latin">platform.claude.com</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">مستويات التحميل وتكلفتها، وقواعد الاسم والوصف، وإرشادات الأمان.</span></li>
             <li><a href="https://code.claude.com/docs/en/skills" rel="noopener"><span class="latin">Use Skills in Claude Code</span></a><span class="src-meta"><span class="latin">code.claude.com</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">مسارات المهارات الشخصية ومهارات المشروع، وأوامر الإضافات.</span></li>
-            <li><a href="https://support.claude.com/en/articles/12512180-using-skills-in-claude" rel="noopener"><span class="latin">Use skills in Claude</span></a><span class="src-meta"><span class="latin">support.claude.com</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">رفع المهارات المخصصة في <span class="latin">claude.ai</span>.</span></li>
+            <li><a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" rel="noopener"><span class="latin">Use skills in Claude</span></a><span class="src-meta"><span class="latin">support.claude.com</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">رفع المهارات المخصصة في <span class="latin">claude.ai</span>.</span></li>
             <li><a href="https://agentskills.io/specification" rel="noopener"><span class="latin">Agent Skills Specification</span></a><span class="src-meta"><span class="latin">agentskills.io</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">بنية المجلد وقواعد الحقول التي يتحقق منها المولّد.</span></li>
             <li><a href="https://github.com/vercel-labs/skills/blob/main/docs/commands.md" rel="noopener"><span class="latin">skills CLI reference</span></a><span class="src-meta"><span class="latin">github.com/vercel-labs/skills</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">صيغ المصادر وخيارات <code dir="ltr">--skill</code> و<code dir="ltr">-a</code> و<code dir="ltr">-g</code>.</span></li>
             <li><a href="https://docs.flutter.dev/ai/get-started" rel="noopener"><span class="latin">Get started developing with AI</span></a><span class="src-meta"><span class="latin">docs.flutter.dev</span> <time datetime="2026-10-24">2026-10-24</time></span><span class="src-desc">أوامر تثبيت إضافات <span class="latin">Flutter</span> ومهارات <span class="latin">Dart</span>.</span></li>

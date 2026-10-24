@@ -142,14 +142,11 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scrollbar-gutter: stable;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
-
-html.dialog-open { overflow: hidden; }
 
 body {
   margin: 0;
@@ -166,7 +163,7 @@ img, svg { max-width: 100%; }
 
 h1, h2, h3, h4 { margin: 0; line-height: 1.4; }
 h1, h2 { font-family: var(--font-display); font-weight: 800; }
-h3, h4 { font-weight: 700; }
+h3, h4 { font-weight: 600; }
 p { margin: 0; }
 ul, ol { margin: 0; padding: 0; }
 
@@ -238,7 +235,7 @@ kbd {
   background: var(--ink);
   color: var(--bg);
   border-radius: var(--r-2);
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
 }
 .skip-link:focus { top: var(--sp-3); }
@@ -258,6 +255,15 @@ kbd {
 
 .section { padding-block: var(--sp-8); }
 .section-alt { background: var(--bg-alt); }
+
+/* الأقسام خارج الشاشة لا تُحسب حتى تقترب: يخفض زمن التخطيط الأول كثيرًا.
+   auto يحفظ الحجم الحقيقي بعد أول عرض، فلا تقفز الصفحة عند العودة. */
+.section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1400px;
+}
+#explorer { contain-intrinsic-size: auto 6000px; }
+#stacks { contain-intrinsic-size: auto 2400px; }
 
 @media (min-width: 960px) {
   .section { padding-block: var(--sp-9); }
@@ -331,8 +337,9 @@ kbd {
   text-decoration: none;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   line-height: 1.3;
+  white-space: nowrap;
 }
 .wordmark-mark { width: 30px; height: 30px; flex: none; }
 .mark-bg { fill: var(--saffron); }
@@ -359,6 +366,7 @@ kbd {
 .theme-toggle { padding: 0; width: 44px; }
 .nav-toggle svg,
 .theme-toggle svg {
+  flex: none;
   width: 20px;
   height: 20px;
   fill: none;
@@ -382,8 +390,10 @@ kbd {
   padding: var(--sp-2) var(--sp-4) var(--sp-4);
   background: var(--bg);
   border-block-end: 1px solid var(--line);
+  box-shadow: 0 16px 32px rgba(10, 14, 16, 0.14);
 }
 .nav-list.is-open { display: flex; }
+.nav-list li + li { border-block-start: 1px solid var(--line); }
 .nav-list a {
   display: flex;
   align-items: center;
@@ -392,7 +402,7 @@ kbd {
   border-radius: var(--r-1);
   color: var(--ink);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
 }
 .nav-list a:hover { background: var(--sunken); }
 
@@ -405,8 +415,10 @@ kbd {
     padding: 0;
     border: 0;
     background: none;
+    box-shadow: none;
     margin-inline-end: var(--sp-3);
   }
+  .nav-list li + li { border: 0; }
   .nav-list a { color: var(--ink-2); font-size: 0.95rem; padding-inline: var(--sp-3); }
   .nav-list a:hover { color: var(--ink); }
 }
@@ -447,7 +459,7 @@ kbd {
   margin-block-start: var(--sp-6);
   max-width: 34em;
   font-size: var(--step-2);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 2.05;
 }
 
@@ -502,7 +514,7 @@ kbd {
 .route-title {
   font-family: var(--font-body);
   font-size: var(--step--1);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink-2);
   margin-block-end: var(--sp-3);
 }
@@ -529,7 +541,7 @@ kbd {
   line-height: 1.6;
   color: var(--saffron-ink);
 }
-.route strong { font-weight: 700; }
+.route strong { font-weight: 600; }
 .route span { color: var(--ink-2); font-size: 0.92rem; line-height: 1.6; }
 .route a:hover strong { text-decoration: underline; text-underline-offset: 0.22em; }
 
@@ -557,7 +569,7 @@ kbd {
   padding: var(--sp-3) var(--sp-4);
   border-block-end: 1px solid var(--line);
   font-size: var(--step--1);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink-2);
 }
 .anatomy-list { list-style: none; padding: var(--sp-2) 0; }
@@ -599,8 +611,6 @@ kbd {
 .level {
   padding-block: var(--sp-4);
   border-block-start: 1px solid var(--line);
-  transition: opacity 0.4s ease;
-  transition-delay: calc(var(--i) * 700ms);
 }
 .level-head { display: flex; align-items: center; gap: var(--sp-3); }
 .level-head h4 { font-size: 1.08rem; }
@@ -617,6 +627,8 @@ kbd {
   font-weight: 800;
   font-size: 0.95rem;
   line-height: 1;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  transition-delay: calc(var(--i) * 700ms);
 }
 .level-when { margin-block-start: var(--sp-2); font-weight: 600; }
 .level-what { color: var(--ink-2); font-size: 0.95rem; }
@@ -650,7 +662,8 @@ kbd {
 .bar-empty span { display: none; }
 .level-cost { font-family: var(--font-body); font-size: 0.92rem; font-weight: 600; color: var(--ink); }
 
-.levels.is-armed:not(.is-playing) .level { opacity: 0.35; }
+/* قبل التشغيل: الأرقام خافتة والأشرطة فارغة، والنص كامل التباين دائمًا */
+.levels.is-armed:not(.is-playing) .level-n { background: var(--sunken); color: var(--ink-2); }
 .levels.is-armed:not(.is-playing) .bar span { transform: scaleX(0); }
 
 .levels-foot {
@@ -779,7 +792,8 @@ kbd {
   font-size: 0.9rem;
   line-height: 1.6;
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  /* الالتفاف عند المسافات وفرص <wbr> أولًا، وكسر الكلمة احتياط أخير فقط */
+  overflow-wrap: break-word;
   text-align: left;
   color: var(--ink);
 }
@@ -808,7 +822,7 @@ kbd {
 
 .scope { margin: 0; display: grid; gap: var(--sp-3); }
 .scope div { display: grid; gap: var(--sp-1); }
-.scope dt { font-weight: 700; }
+.scope dt { font-weight: 600; }
 .scope dd { margin: 0; color: var(--ink-2); }
 
 .note {
@@ -825,18 +839,31 @@ kbd {
 .link-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-5); }
 
 /* ---------- 9. المستكشف ---------- */
-.explorer { display: grid; gap: var(--sp-6); }
-@media (min-width: 1024px) {
-  .explorer { grid-template-columns: 290px minmax(0, 1fr); gap: var(--sp-7); align-items: start; }
-  .filters { position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; padding-inline-end: var(--sp-1); }
-}
+.explorer { display: grid; gap: var(--sp-5); }
 
-.filters { display: grid; gap: var(--sp-5); align-content: start; }
+.filters {
+  display: grid;
+  gap: var(--sp-5);
+  padding: var(--sp-5) var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+}
+@media (min-width: 768px) {
+  .filters { padding: var(--sp-5); }
+}
+@media (min-width: 1024px) {
+  .filters { grid-template-columns: minmax(0, 1fr) auto; gap: var(--sp-5) var(--sp-7); }
+  .search-field { grid-column: 1; grid-row: 1; }
+  .chip-group-tier { grid-column: 2; grid-row: 1; }
+  .chip-group-field,
+  .tier-legend { grid-column: 1 / -1; }
+}
 
 .field label,
 .chip-group legend {
   display: block;
-  font-weight: 700;
+  font-weight: 600;
   margin-block-end: var(--sp-2);
 }
 
@@ -884,7 +911,7 @@ kbd {
   border-radius: var(--r-pill);
   background: var(--surface);
   color: var(--ink);
-  font: 500 0.94rem/1.2 var(--font-body);
+  font: 400 0.94rem/1.2 var(--font-body);
   cursor: pointer;
 }
 .chip:hover { border-color: var(--ink); }
@@ -912,29 +939,32 @@ kbd {
 .chip[aria-pressed="true"] .tier-A .tier-letter,
 .chip[aria-pressed="true"] .tier-B .tier-letter { color: var(--bg); border-color: var(--bg); }
 
-#clear-filters { justify-self: start; }
-
 .tier-legend {
   margin: 0;
   padding-block-start: var(--sp-4);
   border-block-start: 1px solid var(--line);
   display: grid;
-  gap: var(--sp-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--sp-3) var(--sp-6);
 }
 .legend-row { display: grid; gap: var(--sp-1); }
 .legend-row dt { margin: 0; }
 .legend-row dd { margin: 0; font-size: var(--step--1); color: var(--ink-2); line-height: 1.6; }
 
-.result-count {
+.results-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-4);
   margin-block-end: var(--sp-4);
-  font-weight: 600;
-  color: var(--ink-2);
 }
+.result-count { font-weight: 600; color: var(--ink-2); }
 
 .skill-grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: var(--sp-4);
 }
 .skill-item { display: flex; min-width: 0; }
@@ -981,7 +1011,7 @@ kbd {
 }
 .card-open:hover { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
 .card-open:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-.card-ar { margin-block-start: calc(var(--sp-2) * -1); color: var(--ink-2); font-weight: 500; }
+.card-ar { margin-block-start: calc(var(--sp-2) * -1); color: var(--ink-2); font-weight: 400; }
 .card-summary { font-size: 0.98rem; line-height: 1.75; }
 
 .card-meta { margin: 0; display: grid; gap: 2px; font-size: 0.88rem; }
@@ -1018,7 +1048,11 @@ kbd {
 }
 .install-label { font-size: 0.85rem; font-weight: 600; color: var(--ink-2); margin-block-end: var(--sp-2); }
 .install-more { margin-block-start: var(--sp-2); font-size: 0.85rem; color: var(--ink-2); }
-.card-install .cmd { background: var(--bg); }
+/* في البطاقة يكفي سطر واحد لكل أمر؛ النص الكامل في title وفي نافذة التفاصيل، والنسخ ينسخه كاملًا */
+.card-install .cmd { background: var(--bg); padding-block: var(--sp-1); }
+.card-install .cmd-where { display: none; }
+.card-install .cmd code { font-size: 0.86rem; }
+.nowrap { white-space: nowrap; }
 
 .empty {
   padding: var(--sp-6) var(--sp-5);
@@ -1166,8 +1200,10 @@ kbd {
 
 @media (max-width: 640px) {
   .dialog {
-    width: 100vw;
-    height: 100%;
+    /* الحجم من inset لا من width: النسب المئوية و100vw تشمل مساحة شريط التمرير فتدفع النافذة خارج الشاشة */
+    inset: 0;
+    width: auto;
+    height: auto;
     max-height: none;
     margin: 0;
     border: 0;
@@ -1225,7 +1261,7 @@ kbd {
   border: 0;
   background: none;
   color: var(--ink);
-  font: 700 1rem/1.4 var(--font-body);
+  font: 600 1rem/1.4 var(--font-body);
   text-align: start;
   cursor: pointer;
 }
@@ -1249,7 +1285,7 @@ kbd {
   gap: var(--sp-2) var(--sp-3);
   margin-block-end: var(--sp-5);
 }
-.example-label { font-weight: 700; }
+.example-label { font-weight: 600; }
 
 .gen-grid { display: grid; gap: var(--sp-6); }
 @media (min-width: 1024px) {
@@ -1296,7 +1332,7 @@ kbd {
   min-height: 48px;
   display: flex;
   align-items: center;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 .optional[open] { padding-block-end: var(--sp-4); }
@@ -1325,7 +1361,7 @@ kbd {
 .preview code { background: none; padding: 0; font-size: inherit; color: inherit; unicode-bidi: normal; }
 .tk-fence, .tk-comment { color: var(--panel-muted); }
 .tk-key, .tk-bullet { color: var(--panel-key); }
-.tk-head { color: var(--panel-head); font-weight: 500; }
+.tk-head { color: var(--panel-head); font-weight: 400; }
 .tk-punct { color: var(--panel-muted); }
 
 .gen-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-4); }
@@ -1361,7 +1397,7 @@ kbd {
 /* ---------- 15. قائمة التحقق ---------- */
 #checklist > .wrap > p { color: var(--ink-2); margin-block-start: var(--sp-3); }
 .progress { margin-block: var(--sp-5) var(--sp-3); }
-.progress-row { display: flex; justify-content: space-between; font-weight: 700; margin-block-end: var(--sp-2); }
+.progress-row { display: flex; justify-content: space-between; font-weight: 600; margin-block-end: var(--sp-2); }
 .progress-text { font-variant-numeric: tabular-nums; }
 progress {
   -webkit-appearance: none;
@@ -1405,7 +1441,7 @@ progress::-moz-progress-bar { background: var(--petrol); border-radius: var(--r-
 .checklist.is-complete + .checklist-foot::before {
   content: "اكتملت القائمة. ثبّت المهارة وأنت مطمئن.";
   display: block;
-  font-weight: 700;
+  font-weight: 600;
   margin-block-end: var(--sp-2);
 }
 .checklist-foot { margin-block-start: var(--sp-4); }
@@ -1427,6 +1463,15 @@ progress::-moz-progress-bar { background: var(--petrol); border-radius: var(--r-
 .src-meta { display: flex; flex-wrap: wrap; gap: var(--sp-3); font-size: 0.85rem; color: var(--ink-2); }
 .src-meta time { font-variant-numeric: tabular-nums; }
 .src-desc { font-size: 0.92rem; color: var(--ink-2); }
+#sources-repos li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 var(--sp-4);
+  padding-block: var(--sp-2);
+}
+#sources-repos a { font-weight: 400; }
 
 /* ---------- 17. التذييل ---------- */
 .site-footer {
