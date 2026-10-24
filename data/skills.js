@@ -87,7 +87,7 @@ window.TIERS_DATA = [
       ],
       license: "Apache-2.0",
       verifiedAt: V,
-      sources: [ANTHROPIC_README, "https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md", "https://skills.sh/anthropics/skills/frontend-design"]
+      sources: [ANTHROPIC_README, "https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md", "https://www.skills.sh/anthropics/skills/frontend-design"]
     },
     {
       id: "skill-creator",
@@ -451,7 +451,7 @@ window.TIERS_DATA = [
         { method: "cli", labelAr: "المهارة وحدها، الطريق الأسلم", cmds: ["npx skills add JuliusBrussee/caveman -g"] },
         { method: "plugin", cmds: ["/plugin marketplace add JuliusBrussee/caveman", "/plugin install caveman@caveman"] }
       ],
-      cautionAr: "المثبّت الذي يغطي كل الوكلاء في README يمرّر سكربتًا من الإنترنت مباشرة إلى bash (`curl … | bash`)، وفي Windows إلى PowerShell (`irm … | iex`). لم ندرجه هنا. إن احتجته فنزّل السكربت واقرأه قبل تشغيله.",
+      cautionAr: "المثبّت الذي يغطي كل الوكلاء في README يمرّر سكربتًا من الإنترنت مباشرة إلى الطرفية بصيغة `curl … | bash`، وفي Windows بصيغة `irm … | iex`. لم ندرجه هنا. إن احتجته فنزّل السكربت واقرأه قبل تشغيله.",
       license: "Apache-2.0",
       verifiedAt: V,
       sources: ["https://github.com/JuliusBrussee/caveman/blob/main/README.md"]
@@ -478,7 +478,7 @@ window.TIERS_DATA = [
       cautionAr: "المثبّت يضيف hook يعمل بعد كل تعديل على ملفات الواجهة، وينزّل ملفًا تنفيذيًا إلى `~/.impeccable/bin` عند أول تشغيل، ويرسل بيانات استخدام ما لم تعطّلها بالأمر `npx impeccable telemetry off`.",
       license: "Apache-2.0",
       verifiedAt: V,
-      sources: ["https://github.com/pbakaus/impeccable/blob/main/README.md", "https://impeccable.style"]
+      sources: ["https://github.com/pbakaus/impeccable/blob/main/README.md", "https://impeccable.style/"]
     },
     {
       id: "avoid-ai-design",

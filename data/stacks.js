@@ -19,7 +19,7 @@ window.STACKS_DATA = [
   },
   {
     id: "web-fullstack",
-    titleAr: "ويب متكامل (Next.js وReact)",
+    titleAr: "ويب متكامل مع React وNext.js",
     blurbAr: "لمن يبني تطبيقات React أو Next.js مع قاعدة بيانات: أداء، وبنية مكوّنات، واختبار فعلي في المتصفح.",
     items: [
       { id: "vercel-react-best-practices", noteAr: "قواعد الأداء أثناء الكتابة لا بعدها." },
